@@ -39,10 +39,10 @@ Note that by using the following commands all datasets, visulaizations, and pdf 
 
 ```
 make
-'''
+```
 
 To clean the generated files try the following commands:
-'''
+```
 make clean
 make deepclean
-''' 
+``` 
