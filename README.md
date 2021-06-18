@@ -27,3 +27,22 @@ On 32-bit systems Debian/Ubuntu-based systems wine can be installed with
 ```
 sudo apt-get install wine
 ```
+## Usage Instructions
+First clone the respository and create a directory named CMSC6950_Projects
+```
+git clone https://github.com/OmidTarkhaneh/CMSC6950_Project.git
+cd CMSC6950_Project
+```
+
+Assuming you already Installed LaTEX and its dependencies, type the following commands.
+Note that by using the following commands all datasets, visulaizations, and pdf files will be created.
+
+```
+make
+'''
+
+To clean the generated files try the following commands:
+'''
+make clean
+make deepclean
+''' 
