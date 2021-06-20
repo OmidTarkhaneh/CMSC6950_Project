@@ -6,7 +6,9 @@ from matplotlib import pyplot as plt
 
 
 def main():
-
+    '''
+    This function plot Emissions.png which shows the Emission of Fossil and Industrial
+    '''
     data_dfrm=pd.read_csv('rawrcps_dataset.csv')
 
     datafrm_filtered = data_dfrm[(data_dfrm.region == 'World') & (data_dfrm.variable == 'Emissions|CO2|MAGICC Fossil and Industrial')]
