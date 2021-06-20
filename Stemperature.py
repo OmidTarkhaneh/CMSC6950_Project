@@ -4,9 +4,10 @@ import pandas as pd
 
 from matplotlib import pyplot as plt
 
-
 def main():
-
+    '''
+    This function plot Stemperature.png which shows the surface temperature
+    '''
     data_dfrm=pd.read_csv('totalrcp_dataset.csv')
 
     datafrm_filtered = data_dfrm[(data_dfrm.region == 'World') & (data_dfrm.variable == 'Surface Temperature')]
