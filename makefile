@@ -25,7 +25,6 @@ deepclean:
 	latexmk -c
 	rm *.pdf
 	rm *.csv
-	rm Report.aux
 	rm Report.log
 	rm Report.out
 	rm Report.bbl
