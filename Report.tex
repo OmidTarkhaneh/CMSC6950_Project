@@ -15,28 +15,41 @@
 
 
 \begin{abstract}
-This report demonstrates three computational tasks using a python wrapper for the simple climate model called MAGICC. In this regard, we employed some defined scenarios in MAGICC to perform computational tasks in python. The achieved results are visualized, and the results are analyzed based on the plots resulted from the computational tasks.
+This report demonstrates some computational tasks using a python wrapper for the simple climate model called MAGICC. In this regard, we employed some defined scenarios in MAGICC to perform computational tasks in python. The achieved results are visualized, and the results are analyzed based on the plots obtained from the computational tasks.
 \end{abstract}
 
 
-
-
-
-
-\section{Introduction} %) A SECTION HEADING
+\section{Introduction} 
 \label{sec:intro}
-Pymagicc is a Python interface for MAGICC, a reduced-complexity climatic carbon cycle model written in Fortran~\cite{meinshausen2011emulating}. Pymagicc is a wrapper for the MAGICC binary2, which works on Windows and is licensed under a Creative Commons Attribution NonCommercial-ShareAlike 3.0 Unported License3~\cite{Gieseke2018}.
+Pymagicc is a Python interface for MAGICC, a reduced-complexity climatic carbon cycle model written in Fortran~\cite{meinshausen2011emulating, Gieseke2018}.
 
-MAGICC (Model for the Assessment of Greenhouse Gas Induced Climate Change) is commonly used in climate policy evaluations to predict future emissions trajectories, such as in the Intergovernmental Panel on Climate Change's Fifth Assessment Report (IPCC 2014)~\cite{Gieseke2018}. MAGICC is used in many Integrated Assessment Models (IAMs) to model the physical components of climate change. It's also been used to simulate the Coupled Model Intercomparison Projects' complicated atmosphere-ocean general circulation models (AOGCM). 
+MAGICC (Model for the Assessment of Greenhouse Gas Induced Climate Change) is commonly used in climate policy evaluations to predict future emissions trajectories~\cite{Gieseke2018}.
 
 This report uses some scenarios defined in the MAGICC called Representative Concentration Pathway (RCP).
-The IPCC's Representative Concentration Pathway (RCP) is a greenhouse gas concentration (rather than emissions) trajectory. For the IPCC's fifth Assessment Report (AR5) in 2014, four paths were employed for climate modeling and research~\cite{moss2008towards}. The many climate futures described in the pathways are all considered feasible depending on the amount of greenhouse gases (GHG) emitted in the coming years. The RCPs are named after a possible range of radiative forcing levels in the year 2100 (formerly RCP2.6, RCP4.5, RCP6, and RCP8.5). In what follows, we first define the computational tasks and then discuss the task results and analyze the visualized results. Finally, the conclusion will be drawn.
+The Representative Concentration Pathway (RCP) is a greenhouse gas concentration (rather than emissions) trajectory. For the IPCC's fifth Assessment Report (AR5) in 2014, four paths were employed for climate modeling and research~\cite{moss2008towards}. The RCPs are named after a possible range of radioactive forcing levels in the year 2100 (formerly RCP2.6, RCP4.5, RCP6, and RCP8.5).
 
-\section{Predicting the surface temperature}
+In what follows, we first define the project and the used software to run the project, and then it discusses the computational tasks, results and analyzes the visualized results. Finally, the conclusion will be drawn.
+
+
+\section{Project topic and used software}
+
+In the project, we visualized the mean global temperature, the atmospheric concentration of $CO_2$, and emission of $CO_2$, fossil and industrial based on the generated data in different scenarios (RCP26, RCP45, RCP60, and RCP85) provided by the Pymagic wrapper.
+
+This project uses Python 3.8 and the PYMAGIC wrapper to produce data and perform the visualization. In Pymagic, there are built-in plotting functions that we have not utilized in our project; instead, we were interested in using the Matplotlib library in python, which is a standard library for the plotting issues.
+
+In the project, there are four python scripts, each performing different tasks. In LoadData.py, after doing some computational tasks in the “run” method, which is a built-in function provided by the Pymagic, some data are generated and saved in terms of CSV file format used by other python scripts for generating visualization. Other scripts files such as Atomospheric.py, Emission.py, and Stemperature.py will read the generated CSV dataset and used Pandas library in python to convert the dataset into a Dataframe which ease the working with the data for us.
+
+After performing some preprocessing on the data, such as filtering, dropping Nan values, and dropping some unnecessary columns, data are provided to be visualized using the matplotlib library in python. To run the project, it is provided with a "make" file that helps the project to be user-friendly where it can be easily used to generate desired data and visualization. If users are going to run the code without using the make file, they should first run the LoadData.py file to generate the datasets and then run each of the files mentioned above to generate visualizations, which are generated in terms of .png files.
+The instructions to run the project and see the visualization is provided in our Github repository~\footnote{$https://github.com/OmidTarkhaneh/CMSC6950_Project.git$}.
+
+\section{Computational Tasks}
+This section will introduce the "run" method in the Pymagic library. To know what computational tasks are performed inside this method, we have analyzed the source code of this method. According to the source code, this method will perform parsing the data and returns MAGICC Data object containing that data in its "df" attribute and metadata and parameters (depending on the value of "include parameters") in its "metadata" attribute. We performed more tasks on the returned data, which are described in the following subsections. We have also performed some computation on a raw dataset without using the "run" method in the Pymagic library and try to manipulate datasets based on our options.
+
+\subsection{Generate the surface temperature}
 \label{lab:stemp}
-Different employed scenarios in MAGICC have some features and samples. There are various features in the dataset like region, scenario, variable, and so forth. 
+Different employed scenarios in MAGICC have some features and samples. There are various features in the dataset like region, scenario, variable, and so forth.
 
-We have collected the results of all scenarios (RCP26, RCP45, RCP60, and RCP85) in a CSV file for this task. Before collecting this data into a CSV file, different computational tasks have been performed, such as dropping duplicate values, Nan values, etc. In addition, one feature of dataset is related to the region, and for predicting the surface temperature, we have limited the dataset to only count the world region despite some other regions in the dataset. Moreover, we have filtered the variable to surface temperature. In the dataset, variable attribute contains different values related to the greenhouse gases, surface temperature, emissions, etc. Given the achieved dataset after performing some computational task on it, we tried to visualize the obtained data utilized to predict mean surface temperature. In figure~\ref{fig:stemperature}, we have depicted results of the data for all the employed scenarios for surface temperature in the world.   
+We have collected the results of all scenarios (RCP26, RCP45, RCP60, and RCP85) in a CSV file for this task. After collecting the data into a CSV file, different computational tasks have been performed, such as dropping duplicate values, Nan values, etc. In addition, one feature of dataset is related to the region, and for predicting the surface temperature, we have limited the dataset to only count the world region despite some other regions in the dataset. Moreover, we have filtered the variable to surface temperature. In the dataset, variable attribute contains different values related to the greenhouse gases, surface temperature, emissions, etc. Given the achieved dataset after performing some computational tasks on it, we tried to visualize the obtained data to predict mean surface temperature. In figure~\ref{fig:stemperature}, we have depicted results of the data for all the employed scenarios for surface temperature in the world.
 
 
 
@@ -48,14 +61,14 @@ We have collected the results of all scenarios (RCP26, RCP45, RCP60, and RCP85) 
 \label{fig:stemperature}
 \end{figure}
 
-Figure~\ref{fig:stemperature} depicted the surface temperature from 1760 to 2100. The depicted figure shows that there is an increasing trend in all the scenarios, although there are some fluctuations in some years. Since 2000, we have a much more increasing trend where the surface temperature experienced the highest value in scenario RCP85.
+Figure~\ref{fig:stemperature} depicted the surface temperature from 1760 to 2100 years. The depicted figure shows an increasing trend in all the scenarios, although there are some fluctuations in some years. Since 2000, we have a much more increasing trend where the surface temperature experienced the highest value in scenario RCP85.
 
 
 
-\section{Predicting the atmospheric concentration (CO2)}
+\subsection{Generate the atmospheric concentration (CO2)}
 \label{lab:stemp}
 
-This section evaluates the atmospheric concentration of CO2 and utilized different scenarios of RCP26, RCP45, RCP60, and RCP85. To do so, first, we have performed some computational tasks using a "run" method in the pymagicc library in python. The mentioned method does some computation such as parsing the raw dataset. Then, we will filter the dataset based on region and variable attributes where we have used "world" for the region and "atmospheric concentration|CO2" as the variable in the dataset. After creating our dataset, we have visualized the data to evaluate the amount of atmospheric concentration between 1760 to 2100 in the world. Figure~\ref{fig:atomospheric} depicted the obtained data and shows the atmospheric concentration in different years.
+This section evaluates the atmospheric concentration of CO2 and utilized different scenarios of RCP26, RCP45, RCP60, and RCP85. To do so, first, we have performed some computational tasks using a "run" method in the Pymagicc library in python. The mentioned method does some computation such as parsing the raw dataset. Then, we will filter the dataset based on region and variable attributes where we have used "world" for the region and "atmospheric concentration|CO2" as the variable in the dataset. After creating our dataset, we have visualized the data to evaluate the amount of atmospheric concentration between the years 1760 to 2100 in the world. Figure~\ref{fig:atomospheric} depicted the obtained data and shows the atmospheric concentration in different years.
 
 
 \begin{figure}[H]
@@ -65,15 +78,13 @@ This section evaluates the atmospheric concentration of CO2 and utilized differe
 \label{fig:atomospheric}
 \end{figure}
 
-Figure~\ref{fig:atomospheric} shows the atmospheric concentration of CO2 from 1760 to 2100 in the world. According to the figure, from 1760 to 1960, there is not a considerable increment in terms of atmospheric concentration of CO2; however, since 2000, especially the world experience a huge concentration where its highest value is more dominant in scenario RCP85. To the best of our knowledge, this sharp increment is due to the industrial improvement which is created by mankind. After the industrial revolution, generating greenhouse gases increased, and this is one main reason for increasing the surface temperature too.
+Figure~\ref{fig:atomospheric} shows the atmospheric concentration of CO2 from the years 1760 to 2100 in the world. According to the figure, from 1760 to 1960, there is not a considerable increment in terms of atmospheric concentration of CO2; however, since 2000, especially the world experience a huge concentration where its highest value is more dominant in scenario RCP85. To the best of our knowledge, this sharp increment is due to the industrial improvement which is created by mankind. After the industrial revolution, generating greenhouse gases increased, and this is one main reason for increasing the surface temperature too.
 
 
-
-
-\section{Predicting Emissions of CO2, Fossil, and Industrial}
+\subsection{Generate Emissions of CO2, Fossil, and Industrial}
 \label{lab:stemp}
 
-In this section, we worked on a raw dataset where we have not utilized the run method in pymagic library in python; rather, we have tried to handle the data and manipulate it ourselves. The prepossessing that is done include dropping Nan values and dropping duplicate samples, filtering dataset based on region and variable, dropping some of the features which are not needed to make the projection, and so on. After doing prepossessing, the dataset was visualized, and it shows an interesting diagram of emission of fossil and industrial as well as CO2 in the world. This time we tried to depict the data from 2000 to 2100. Figure~\ref{fig:emission} shows the results.
+In this section, we worked on a raw dataset where we have not utilized the run method in the Pymagic library in python; rather, we have tried to handle the data and manipulate it ourselves. The prepossessing that is done includes dropping Nan values and dropping duplicate samples, filtering datasets based on region and variable, dropping some of the features that are not needed to make the projection, etc. After doing prepossessing, the dataset was visualized, and it shows an interesting diagram of emission of fossil and industrial as well as CO2 in the world. This time we tried to depict the data from 2000 to 2100. Figure~\ref{fig:emission} shows the results.
 
 
 \begin{figure}[H]
@@ -83,7 +94,7 @@ In this section, we worked on a raw dataset where we have not utilized the run m
 \label{fig:emission}
 \end{figure}
 
-In Figure~\ref{fig:emission} there are different trends for each scenarios. Scenario RCP85 shows an increase in the emission of the selected parameters(fossils and industrial, and CO2); however, scenarios such as RCP26 and RCP45 show a decrease in the emission of the selected parameters. The interesting thing is that from 2050 to 2100, there is no such increase in emissions of the selected metrics, and even in some scenarios it this emission is decreased. 
+In Figure~\ref{fig:emission} there are different trends for each scenarios. Scenario RCP85 shows an increase in the emission of the selected parameters (fossils and industrial, and CO2); however, scenarios such as RCP26 and RCP45 show a decrease in the emission of the selected parameters. The interesting thing is that from the years 2050 to 2100, there is no such increase in emissions of the selected metrics, and even in some scenarios, the emission value is decreased.
 
 
 
@@ -91,7 +102,7 @@ In Figure~\ref{fig:emission} there are different trends for each scenarios. Scen
 
 \section{Conclusion}
 \label{lab:conclusion}
-In this report, we have visualized some data based on some scenarios utilizing pymagic library in python. According to the results, it is showing that we will see an increasing trend in terms of atmospheric concentration and emission of greenhouse gases in the future. It is concluded that this increment is due to the industrial practice of humankind generating much more greenhouse gases and increasing the surface temperature. One exciting thing was that from 2050 to 2100, we might not experience a sharp increase, and we may even see a decrease base on some scenarios. 
+This report visualized some data based on some scenarios utilizing the Pymagic library in python. The results show that we will see an increasing trend in terms of atmospheric concentration, emission of greenhouse gases, and ultimately the surface temperature in the future.  One exciting thing was that from the years 2050 to 2100, we might not experience a sharp increase, and we may even see a decrease base on some scenarios.
 
 \begin{thebibliography}{9}
 \bibitem{Gieseke2018} 
